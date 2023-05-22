@@ -2,6 +2,8 @@ package com.example.clienteapi.API;
 
 
 
+import com.example.clienteapi.base.Parameters;
+
 import java.io.IOException;
 import java.security.Policy;
 
@@ -12,7 +14,8 @@ import retrofit2.Retrofit;
 
 public class CallMethods<T>  {
 
-    private Retrofit retrofit = new Retrofit.Builder().baseUrl(Policy.Parameters.URL).build();
+
+    private Retrofit retrofit = new Retrofit.Builder().baseUrl(Parameters.URL).build();
     private APIService service = retrofit.create(APIService.class);
     private static CallMethods callMethods;
 

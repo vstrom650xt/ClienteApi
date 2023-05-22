@@ -1,7 +1,7 @@
 package com.example.clienteapi.API;
 
 
-import com.example.myweatherbase.base.Parameters;
+import com.example.clienteapi.base.Parameters;
 
 import java.util.List;
 
@@ -12,13 +12,13 @@ import okhttp3.RequestBody;
 public class Connector{
 
     private static Connector connector;
-    private static com.example.myweatherbase.API.Conversor conversor;
+    private static com.example.clienteapi.API.Conversor conversor;
     private static CallMethods callMethodsObject;
 
     public static Connector getConector(){
         if(connector == null){
             connector = new Connector();
-            conversor = com.example.myweatherbase.API.Conversor.getConversor();
+            conversor = com.example.clienteapi.API.Conversor.getConversor();
             callMethodsObject = CallMethods.getCallMethodsObject();
         }
         return connector;

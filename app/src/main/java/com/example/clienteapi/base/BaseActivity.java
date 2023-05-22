@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myweatherbase.API.Connector;
+import com.example.clienteapi.API.Connector;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -18,13 +18,13 @@ public class BaseActivity extends AppCompatActivity {
     protected Connector connector;
     protected ExecutorService executor = Executors.newSingleThreadExecutor();
     protected Handler handler = new Handler(Looper.getMainLooper());
-    protected com.example.myweatherbase.base.MyProgressBar progressBar;
+    protected com.example.clienteapi.base.MyProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         connector = Connector.getConector();
-        progressBar = new com.example.myweatherbase.base.MyProgressBar(this);
+        progressBar = new com.example.clienteapi.base.MyProgressBar(this);
     }
 
     protected void executeCall(CallInterface callInterface){
