@@ -9,7 +9,15 @@ public class Oficio implements Serializable {
     private String descripcion;
     private String imgUrl;
 
+    public int getIdOficio() {
+        return idOficio;
+    }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-
+    public String getImgUrl() {
+        return imgUrl;
+    }
 }

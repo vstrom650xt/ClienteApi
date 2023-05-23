@@ -12,5 +12,19 @@ public class Usuario implements Serializable {
     private String apellidos;
     private int idOficio;
 
+    public int getIdUsuario() {
+        return idUsuario;
+    }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public int getIdOficio() {
+        return idOficio;
+    }
 }
