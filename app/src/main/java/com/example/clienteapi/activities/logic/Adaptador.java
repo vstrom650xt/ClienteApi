@@ -12,16 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clienteapi.R;
 import com.example.clienteapi.activities.model.Oficio;
+import com.example.clienteapi.activities.model.OficioRepository;
 import com.example.clienteapi.activities.model.Usuario;
 import com.example.clienteapi.activities.model.UsuarioRepository;
 
 public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
 
+    private OficioRepository listaoficios;
     private UsuarioRepository listaUsuario;
     private  LayoutInflater inflater;
 
     public Adaptador(Context context) {
         listaUsuario = UsuarioRepository.getInstance();
+        listaoficios = OficioRepository.getInstance();
         inflater =(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -34,11 +37,13 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        Usuario usuario = listaUsuario.get(position);
-//        Oficio oficio = oficio.getInstance().getProfessionByImg(oficio.getImgUrl());
-//        holder.nombre.setText(usuario.getApellidos()+" "+ usuario.getNombre());
-//        holder.profesion.setText(oficio.getIdOficio());
-//        holder.imagen.setImageResource(oficio.getImgUrl());
+        Usuario usuario = listaUsuario.get(position);
+        System.out.println("eee");
+        holder.nombre.setText(usuario.getApellidos()+" "+ usuario.getNombre());
+        //  Oficio oficio = listaoficios.getInstance().getProfessionByImg(oficio.getImgUrl());
+    //    Oficio oficio = listaoficios.getAll().get(position);
+    //    holder.profesion.setText(oficio.getIdOficio());
+     //   holder.imagen.setImageResource(oficio.getImgUrl());
 
 
 

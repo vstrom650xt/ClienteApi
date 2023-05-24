@@ -20,8 +20,7 @@ import java.util.List;
 //el baseactivity es necesario para hacer elececute call
 public class MainActivity extends BaseActivity implements CallInterface {
 private RecyclerView rcv;
-private Usuario usuario;
-private UsuarioRepository usuarioRepository;
+
 
 private List<Usuario> usuarios;
     public  void onCreate (Bundle savedInstanceState){
@@ -32,6 +31,8 @@ private List<Usuario> usuarios;
         showProgress();
         executeCall(this);
 
+
+
     }
 
     ///
@@ -40,18 +41,16 @@ private List<Usuario> usuarios;
     public void doInBackground() {
 
         usuarios = Connector.getConector().getAsList(Usuario.class,"usuarios/");
-
-
-
+        Adaptador adaptador = new Adaptador(this);
+        rcv.setAdapter(adaptador);
+        rcv.setLayoutManager(new LinearLayoutManager(this));
+        adaptador.notifyDataSetChanged();
     }
 
     @Override
     public void doInUI() {
         hideProgress();
-        for (int i = 0; i <usuarios.size() ; i++) {
-            System.out.println(usuarios.get(i));
-
-        }
+    
 
     }
 }
