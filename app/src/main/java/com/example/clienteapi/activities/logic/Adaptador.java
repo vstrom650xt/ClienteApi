@@ -12,19 +12,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clienteapi.R;
 import com.example.clienteapi.activities.model.Oficio;
-import com.example.clienteapi.activities.model.OficioRepository;
 import com.example.clienteapi.activities.model.Usuario;
-import com.example.clienteapi.activities.model.UsuarioRepository;
+import com.example.clienteapi.base.ImageDownloader;
+import com.example.clienteapi.base.Parameters;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
 
-    private OficioRepository listaoficios;
-    private UsuarioRepository listaUsuario;
+    private List<Oficio> listaoficios;
+    private List<Usuario> listaUsuario;
     private  LayoutInflater inflater;
 
     public Adaptador(Context context) {
-        listaUsuario = UsuarioRepository.getInstance();
-        listaoficios = OficioRepository.getInstance();
+        listaUsuario = new ArrayList<>();
+        listaoficios = new ArrayList<>();
         inflater =(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -37,17 +40,25 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        //relacionar al usuario con el oficio por id y despues con este id sacar la img
         Usuario usuario = listaUsuario.get(position);
-        System.out.println("eee");
         holder.nombre.setText(usuario.getApellidos()+" "+ usuario.getNombre());
-        //  Oficio oficio = listaoficios.getInstance().getProfessionByImg(oficio.getImgUrl());
-    //    Oficio oficio = listaoficios.getAll().get(position);
-    //    holder.profesion.setText(oficio.getIdOficio());
-     //   holder.imagen.setImageResource(oficio.getImgUrl());
+
+        //
+         Oficio oficio = listaoficios.get(listaUsuario.get(position).getIdOficio()-1);
+         holder.profesion.setText(oficio.getDescripcion());
+
+        ImageDownloader.downloadImage(inflater.getContext(), Parameters.URL_OPTIONS + oficio.getImgUrl(),holder.imagen,R.mipmap.ic_launcher);
 
 
 
     }
+    public void setData(List<Usuario> usuarioList, List<Oficio> listaoficios){
+        this.listaUsuario = usuarioList;
+        this.listaoficios = listaoficios;
+    }
+
+
 
     @Override
     public int getItemCount() {
