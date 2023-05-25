@@ -93,22 +93,37 @@ private Adaptador adaptadorRecy;
                         int i = usuario.getIdUsuario();
                         usuarios.remove(position);
                         usuario = Connector.getConector().delete(Usuario.class,"usuarios/"+i);
-
                     }
 
                     @Override
                     public void doInUI() {
                         adaptadorRecy.notifyItemRemoved(position);
                         adaptadorRecy.notifyDataSetChanged();
-
                     }
                 });
 
                 Snackbar.make(rcv, "deleted", Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //addUser
-                        //adaptadorRecycler.notifyItemInserted(position);
+                        //updateUser
+                        usuario  = usuarios.get(position);
+                        executeCall(new CallInterface() {
+                            @Override
+                            public void doInBackground() {
+                                usuario = usuarios.get(position);
+
+
+                            }
+
+                            @Override
+                            public void doInUI() {
+                                adaptadorRecy.notifyItemInserted(position);
+                                adaptadorRecy.notifyDataSetChanged();
+
+
+
+                            }
+                        });
                     }
                 }).show();
             }
@@ -122,10 +137,8 @@ private Adaptador adaptadorRecy;
 
     @Override
     public void doInBackground() {
-
         usuarios = Connector.getConector().getAsList(Usuario.class,"usuarios/");
         oficios = Connector.getConector().getAsList(Oficio.class,"oficios/");
-
     }
 
     @Override
@@ -133,9 +146,5 @@ private Adaptador adaptadorRecy;
         hideProgress();
         adaptadorRecy.setData(usuarios,oficios);
         adaptadorRecy.notifyDataSetChanged();
-
     }
-
-
-
 }
