@@ -12,6 +12,12 @@ public class Usuario implements Serializable {
     private String apellidos;
     private int idOficio;
 
+    public Usuario(String nombre, String apellidos, int idOficio) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.idOficio = idOficio;
+    }
+
     public int getIdUsuario() {
         return idUsuario;
     }

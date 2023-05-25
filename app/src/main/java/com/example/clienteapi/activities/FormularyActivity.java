@@ -12,14 +12,16 @@ import com.example.clienteapi.API.Connector;
 import com.example.clienteapi.R;
 import com.example.clienteapi.activities.model.Oficio;
 import com.example.clienteapi.activities.model.Usuario;
+import com.example.clienteapi.base.BaseActivity;
+import com.example.clienteapi.base.CallInterface;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FormularyActivity extends AppCompatActivity {
+public class FormularyActivity extends BaseActivity {
 
-    //private ArrayList<Usuario> usuarios;
+    private Usuario usuario;
     private ArrayList<Oficio> oficios;
     private TextInputEditText tietnombre;
     private TextInputEditText tietapellidos;
@@ -27,7 +29,7 @@ public class FormularyActivity extends AppCompatActivity {
     private Button bAceptar;
     private Button bCancelar;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
         tietnombre = findViewById(R.id.tietNombre);
@@ -54,14 +56,29 @@ public class FormularyActivity extends AppCompatActivity {
         });
 //gestionamos el botón aceptar comunicando la intención con la  información a pasar al layout que llamó
         bAceptar.setOnClickListener(v -> {
-            Intent i = new Intent();
+
             String nombre = tietnombre.getText().toString();
             String apellidos = tietapellidos.getText().toString();
-            Oficio profesion = (Oficio) spinner.getSelectedItem();
-        //   i.putExtra("usuario", new Usuario(nombre, apellidos,
-               //     profesion.getImg()));
-            setResult(RESULT_OK,i);
-       //     finish();
+            Oficio oficio = (Oficio) spinner.getSelectedItem();
+            usuario = new Usuario(nombre,apellidos,oficio.getIdOficio());
+           executeCall(new CallInterface() {
+               @Override
+               public void doInBackground() {
+                   usuario = Connector.getConector().post(Usuario.class,usuario,"usuarios/");
+
+               }
+
+               @Override
+               public void doInUI() {
+
+                  Intent  i = new Intent(FormularyActivity.this,MainActivity.class);
+                   i.putExtra("usuario", usuario);
+                   setResult(RESULT_OK,i);
+                   finish();
+
+
+               }
+           });
         });
     }
 }
