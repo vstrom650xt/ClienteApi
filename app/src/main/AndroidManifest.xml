@@ -27,6 +27,12 @@
         </intent-filter>
     </activity>
 
+        <activity
+            android:name=".activities.FormularyActivity"
+            android:exported="false">
+
+        </activity>
+
         </application>
 
 </manifest>

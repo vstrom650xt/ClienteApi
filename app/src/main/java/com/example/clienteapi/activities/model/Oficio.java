@@ -20,4 +20,9 @@ public class Oficio implements Serializable {
     public String getImgUrl() {
         return imgUrl;
     }
+
+    @Override
+    public String toString() {
+        return  descripcion;
+    }
 }

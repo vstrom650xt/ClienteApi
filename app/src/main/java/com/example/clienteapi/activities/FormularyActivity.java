@@ -8,6 +8,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.clienteapi.API.Connector;
 import com.example.clienteapi.R;
 import com.example.clienteapi.activities.model.Oficio;
 import com.example.clienteapi.activities.model.Usuario;
@@ -35,10 +36,15 @@ public class FormularyActivity extends AppCompatActivity {
         bAceptar = findViewById(R.id.buttonAceptar);
         bCancelar = findViewById(R.id.buttonCancelar);
         Bundle bundle = getIntent().getExtras();
+
+
+        oficios =(ArrayList<Oficio>) bundle.getSerializable("oficios");
 //Cargamos el spinner con las profesiones
         ArrayAdapter<Oficio> myAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item,
-                oficios.get(bundle.getSerializable("oficios")); // devuelve listado con todas las profesiones
+                oficios);
+
+             // devuelve listado con todas las profesiones
         spinner.setAdapter(myAdapter);
 //gestionamos el botón cancelar comunicando que el resultado se canceló
         bCancelar.setOnClickListener(v -> {
@@ -52,10 +58,10 @@ public class FormularyActivity extends AppCompatActivity {
             String nombre = tietnombre.getText().toString();
             String apellidos = tietapellidos.getText().toString();
             Oficio profesion = (Oficio) spinner.getSelectedItem();
-            i.putExtra("usuario", new Usuario(nombre, apellidos,
-                    profesion.getImg()));
+        //   i.putExtra("usuario", new Usuario(nombre, apellidos,
+               //     profesion.getImg()));
             setResult(RESULT_OK,i);
-            finish();
+       //     finish();
         });
     }
 }

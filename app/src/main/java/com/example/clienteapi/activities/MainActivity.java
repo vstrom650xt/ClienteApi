@@ -36,6 +36,7 @@ private FloatingActionButton addbtn ;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         rcv = findViewById( R.id.rcv);
+        addbtn = findViewById(R.id.floatingActionButton);
         showProgress();
         executeCall(this);
         ActivityResultLauncher <Intent> someactivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),result ->{
