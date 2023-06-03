@@ -18,6 +18,14 @@ public class Usuario implements Serializable {
         this.idOficio = idOficio;
     }
 
+
+    public Usuario(int idUsuario,String nombre, String apellidos, int idOficio) {
+        this.idUsuario=idUsuario;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.idOficio = idOficio;
+    }
+
     public int getIdUsuario() {
         return idUsuario;
     }

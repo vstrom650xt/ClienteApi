@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Vista de fondo semi-transparente -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="411dp"
+        android:background="#FFFFFF" />
+
+    <!-- Contenido de la ventana emergente -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="337dp"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Modificar usuario"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editnombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Ingrese su nombre"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editoficio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Ingrese su oficio"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/popacept"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Aceptar" />
+
+        <Button
+            android:id="@+id/popcancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancelar" />
+
+    </LinearLayout>
+
+</RelativeLayout>

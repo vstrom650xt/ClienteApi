@@ -24,6 +24,8 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
     private List<Oficio> listaoficios;
     private List<Usuario> listaUsuario;
     private  LayoutInflater inflater;
+    private  static View.OnClickListener rcvlistener;
+//    private OnItemClickListener listener;
 
     public Adaptador(Context context) {
         listaUsuario = new ArrayList<>();
@@ -35,6 +37,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.simple_element,parent,false);
+        view.setOnClickListener(rcvlistener);
         return new ViewHolder(view);
     }
 
@@ -44,7 +47,6 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
         Usuario usuario = listaUsuario.get(position);
         holder.nombre.setText(usuario.getApellidos()+" "+ usuario.getNombre());
 
-        //
          Oficio oficio = listaoficios.get(listaUsuario.get(position).getIdOficio()-1);
          holder.profesion.setText(oficio.getDescripcion());
 
@@ -58,6 +60,9 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolder> {
         this.listaoficios = listaoficios;
     }
 
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        rcvlistener = onClickListener;
+    }
 
 
     @Override

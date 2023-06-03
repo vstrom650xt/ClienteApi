@@ -28,8 +28,9 @@ public class FormularyActivity extends BaseActivity {
     private Spinner spinner;
     private Button bAceptar;
     private Button bCancelar;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
         tietnombre = findViewById(R.id.tietNombre);
@@ -40,18 +41,18 @@ public class FormularyActivity extends BaseActivity {
         Bundle bundle = getIntent().getExtras();
 
 
-        oficios =(ArrayList<Oficio>) bundle.getSerializable("oficios");
+        oficios = (ArrayList<Oficio>) bundle.getSerializable("oficios");
 //Cargamos el spinner con las profesiones
         ArrayAdapter<Oficio> myAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item,
                 oficios);
 
-             // devuelve listado con todas las profesiones
+        // devuelve listado con todas las profesiones
         spinner.setAdapter(myAdapter);
 //gestionamos el botón cancelar comunicando que el resultado se canceló
         bCancelar.setOnClickListener(v -> {
             Intent i = new Intent();
-            setResult(RESULT_CANCELED,i);
+            setResult(RESULT_CANCELED, i);
             finish();
         });
 //gestionamos el botón aceptar comunicando la intención con la  información a pasar al layout que llamó
@@ -60,25 +61,25 @@ public class FormularyActivity extends BaseActivity {
             String nombre = tietnombre.getText().toString();
             String apellidos = tietapellidos.getText().toString();
             Oficio oficio = (Oficio) spinner.getSelectedItem();
-            usuario = new Usuario(nombre,apellidos,oficio.getIdOficio());
-           executeCall(new CallInterface() {
-               @Override
-               public void doInBackground() {
-                   usuario = Connector.getConector().post(Usuario.class,usuario,"usuarios/");
+            usuario = new Usuario(nombre, apellidos, oficio.getIdOficio());
+            executeCall(new CallInterface() {
+                @Override
+                public void doInBackground() {
+                    usuario = Connector.getConector().post(Usuario.class, usuario, "usuarios/");
 
-               }
+                }
 
-               @Override
-               public void doInUI() {
+                @Override
+                public void doInUI() {
 
-                  Intent  i = new Intent(FormularyActivity.this,MainActivity.class);
-                   i.putExtra("usuario", usuario);
-                   setResult(RESULT_OK,i);
-                   finish();
+                    Intent i = new Intent(FormularyActivity.this, MainActivity.class);
+                    i.putExtra("usuario", usuario);
+                    setResult(RESULT_OK, i);
+                    finish();
 
 
-               }
-           });
+                }
+            });
         });
     }
 }
