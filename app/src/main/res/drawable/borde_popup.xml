@@ -1,0 +1,6 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FFFFFF" /> <!-- Color de fondo de la ventana emergente -->
+    <stroke
+        android:width="2dp" /><!-- Ancho del borde -->
+    <corners android:radius="8dp" /> <!-- Radio de las esquinas del borde -->
+</shape>

@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="337dp"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="@drawable/borde_popup">
 
         <TextView
             android:layout_width="match_parent"
@@ -51,6 +52,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Cancelar" />
+
+
+
 
     </LinearLayout>
 

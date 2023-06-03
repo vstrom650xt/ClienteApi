@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +34,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 //el baseactivity es necesario para hacer elececute call
 public class MainActivity extends BaseActivity implements CallInterface, View.OnClickListener {
@@ -59,6 +62,21 @@ public class MainActivity extends BaseActivity implements CallInterface, View.On
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        TimerTask timerTask = new TimerTask() {
+//            @Override
+//            public void run() {
+//                Intent intent = new Intent(MainActivity.this,MenuActivity.class);
+//                startActivity(intent);
+//                finish();
+//
+//            }
+//        };
+//        Timer timer = new Timer();
+//        timer.schedule(timerTask,4000);
+
+
+
         rcv = findViewById(R.id.rcv);
         addbtn = findViewById(R.id.floatingActionButton);
 
@@ -222,6 +240,7 @@ public class MainActivity extends BaseActivity implements CallInterface, View.On
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 popupWindow.dismiss();
             }
         });
@@ -231,9 +250,7 @@ public class MainActivity extends BaseActivity implements CallInterface, View.On
         boolean focusable = true;
 
         popupWindow = new PopupWindow(popupView, width, height, focusable);
-
         popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
-
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
