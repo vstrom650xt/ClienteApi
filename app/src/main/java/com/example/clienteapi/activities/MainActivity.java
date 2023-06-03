@@ -107,7 +107,9 @@ public class MainActivity extends BaseActivity implements CallInterface, View.On
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-                //remove usuario
+
+                Usuario  usuarioauxiliar  = usuarios.get(position);
+                                //remove usuario
                 executeCall(new CallInterface() {
                     @Override
                     public void doInBackground() {
@@ -127,22 +129,19 @@ public class MainActivity extends BaseActivity implements CallInterface, View.On
                 Snackbar.make(rcv, "deleted", Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //updateUser
-                        usuario = usuarios.get(position);
+                       // on click del undo auxilar persona
+                        usuarios.add(position,usuarioauxiliar);
                         executeCall(new CallInterface() {
                             @Override
                             public void doInBackground() {
                                 usuario = usuarios.get(position);
-
-
+                               usuario= Connector.getConector().post(Usuario.class, usuarioauxiliar, "usuarios/");
+                         //       usuarios.add(position,usuario);
                             }
-
                             @Override
                             public void doInUI() {
                                 adaptadorRecy.notifyItemInserted(position);
                                 adaptadorRecy.notifyDataSetChanged();
-
-
                             }
                         });
                     }
